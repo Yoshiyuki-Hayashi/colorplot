@@ -25,25 +25,38 @@ for i in range(len(P)):
     for j in range(len(temp)):
         PT.append([P[i],temp[j]])
 
-chi_2Dinterp = interpolate.interp2d(temp, P, chi, kind='cubic')
-
+#print (chi)
 x = np.arange(0, 1.4, 0.05)
-y = np.arange(0, 300, 0.5)
 
-X, Y = np.meshgrid(x, y)
-#print(X)
-#print(Y)
-Z = chi_2Dinterp(x,y)
-print (chi_2Dinterp(0.0,270))
-plt.pcolormesh(X, Y, Z, cmap='hsv') 
 
-pp = plt.colorbar (orientation="vertical") 
-pp.set_label("chi", fontname="Arial", fontsize=24) 
-plt.clim(0.06, 0.2)
-plt.xlabel('Pressure', fontsize=24)
-plt.ylabel('Temperature', fontsize=24)
-
+plt.figure()
+for j in range(len(temp)):
+    for i in range(len(P)):
+        f = interpolate.interp1d(P,chi[:,j],kind="linear")
+        plt.plot(x, f(x))
 plt.show()
+#chi_2Dinterp = interpolate.interp2d(temp, P, chi, kind='cubic')
+
+#y = np.arange(0, 300, 0.5)
+#
+##plt.plot(x, f[0](x))
+##plt.plot(x, f[100](x))
+##plt.show()
+#
+#X, Y = np.meshgrid(x, y)
+##print(X)
+##print(Y)
+#Z = chi_2Dinterp(x,y)
+#print (chi_2Dinterp(0.0,270))
+#plt.pcolormesh(X, Y, Z, cmap='hsv') 
+#
+#pp = plt.colorbar (orientation="vertical") 
+#pp.set_label("chi", fontname="Arial", fontsize=24) 
+#plt.clim(0.06, 0.2)
+#plt.xlabel('Pressure', fontsize=24)
+#plt.ylabel('Temperature', fontsize=24)
+#
+#plt.show()
 
 #for j in range(len(temp)):
 #    chi_T_fix = []
